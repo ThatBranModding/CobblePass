@@ -35,7 +35,7 @@ public class CobblePass implements ModInitializer {
 
         // Register commands with Fabric
         net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback.EVENT.register(
-            (dispatcher, registryAccess, environment) -> CommandsRegistry.registerCommands(dispatcher)
+                (dispatcher, registryAccess, environment) -> CommandsRegistry.registerCommands(dispatcher)
         );
 
         LOGGER.info("CobblePass initialized");
@@ -87,7 +87,7 @@ public class CobblePass implements ModInitializer {
 
     public static void resetInstance() {
         LOGGER.info("Resetting CobblePass configuration and data in memory...");
-        
+
         // Create new, empty objects to replace the old ones in memory
         config = new Config();
         if (battlePass != null) {
@@ -95,7 +95,7 @@ public class CobblePass implements ModInitializer {
         } else {
             battlePass = new BattlePass();
         }
-        
+
         LOGGER.info("CobblePass has been reset. Please create a new Battle Pass to continue.");
     }
 }

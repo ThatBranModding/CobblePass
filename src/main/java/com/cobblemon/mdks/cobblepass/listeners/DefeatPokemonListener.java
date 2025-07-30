@@ -22,17 +22,17 @@ public class DefeatPokemonListener {
     private static Unit handle(BattleFaintedEvent event) {
         // Get the fainted Pokémon
         BattleActor faintedActor = event.getKilled().getActor();
-        
+
         // Iterate through all actors to find opponents
         for (BattleActor actor : event.getBattle().getActors()) {
             // Skip if it's the fainted actor or not a player
             if (actor == faintedActor || !(actor instanceof PlayerBattleActor)) {
                 continue;
             }
-            
+
             PlayerBattleActor playerActor = (PlayerBattleActor) actor;
             ServerPlayer player = playerActor.getEntity();
-            
+
             if (player == null) {
                 LOGGER.debug("PlayerBattleActor does not have an associated ServerPlayer. Skipping.");
                 continue;
@@ -44,6 +44,9 @@ public class DefeatPokemonListener {
                 LOGGER.debug("No Battle Pass found for player: " + player.getName().getString());
                 continue;
             }
+
+            // **Set the player on the battlePass so level up message can be sent**
+            battlePass.setPlayer(player);
 
             // Award XP based on configuration
             int xpToAward = CobblePass.config.getDefeatXP();

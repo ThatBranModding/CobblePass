@@ -2,7 +2,6 @@ package com.cobblemon.mdks.cobblepass.listeners;
 
 import com.cobblemon.mdks.cobblepass.CobblePass;
 import com.cobblemon.mdks.cobblepass.battlepass.PlayerBattlePass;
-import com.cobblemon.mdks.cobblepass.config.Config;
 import com.cobblemon.mdks.cobblepass.util.Logger;
 import com.cobblemon.mod.common.api.Priority;
 import com.cobblemon.mod.common.api.events.CobblemonEvents;
@@ -21,6 +20,7 @@ public class CatchPokemonListener {
         if (event.getPlayer() instanceof ServerPlayer player) {
             PlayerBattlePass battlePass = CobblePass.battlePass.getPlayerPass(player);
             if (battlePass != null) {
+                battlePass.setPlayer(player);
                 int xp = CobblePass.config.getCatchXP();
                 battlePass.addXP(xp);
                 LOGGER.debug("Awarded " + xp + " XP to " + player.getName().getString() + " for catching a Pokémon");
